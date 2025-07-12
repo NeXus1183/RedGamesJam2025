@@ -3,7 +3,7 @@ using UnityEngine.Android;
 
 public class Person : MonoBehaviour
 {
-    [SerializeField] private PersonData perData;
+    public PersonData perData;
     [SerializeField] private Renderer selfSprite;
     [SerializeField] private BoxCollider2D selfColldier;
     [SerializeField] private Transform hatTrans;
@@ -123,6 +123,111 @@ public class Person : MonoBehaviour
             //    toRandFeat = Random.Range(0, posLuggage.Length);
             //    luggage.sprite = posLuggage[toRandFeat];
             //}
+            setData();
+        }
+    }
+
+    public void rollDataReq(bool type, Sprite toSpawn)
+    {
+        int toRandFeat = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == 0)
+            {
+                toRandFeat = Random.Range(0, posPer.Length);
+                person.sprite = posPer[toRandFeat];
+                if (toRandFeat == 0)
+                {
+                    hairlCur = true;
+                    headTrans.localPosition = new Vector3(headTrans.localPosition.x, 0.086f, headTrans.localPosition.z);
+                }
+                else
+                {
+                    hairlCur = false;
+                }
+            }
+            if (i == 1)
+            {
+                if (type == false)
+                {
+                    for (int j = 0; j < posClothes.Length; j++)
+                    {
+                        if (posClothes[j] == toSpawn)
+                        {
+                            clothes.sprite = posClothes[j];
+                            toRandFeat = j;
+                        }
+                    }
+                }
+                else
+                {
+                    toRandFeat = Random.Range(0, posHat.Length);
+                    hat.sprite = posHat[toRandFeat];
+                }
+
+                if (hairlCur == true)
+                {
+                    if (toRandFeat == 0)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.001f, 0.246f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 0 && toRandFeat < 5)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.054f, 0.28f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    {
+                        hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat >= 8)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.005f, 0.34f, hatTrans.localPosition.z);
+                    }
+                }
+                else
+                {
+                    if (toRandFeat == 0)
+                    {
+                        hatTrans.localPosition = new Vector3(0.001f, 0.235f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 0 && toRandFeat < 5)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.049f, 0.28f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    {
+                        hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat >= 8)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.005f, 0.354f, hatTrans.localPosition.z);
+                    }
+                }
+            }
+            else if (i == 2)
+            {
+                if (type == true)
+                {
+                    for (int j = 0; j < posClothes.Length; j++)
+                    {
+                        if (posClothes[j] == toSpawn)
+                        {
+                            clothes.sprite = posClothes[j];
+                        }
+                    }
+                }
+                else
+                {
+                    toRandFeat = Random.Range(0, posClothes.Length);
+                    clothes.sprite = posClothes[toRandFeat];
+                }
+            }
+            //else if (i == 3)
+            //{
+            //    toRandFeat = Random.Range(0, posLuggage.Length);
+            //    luggage.sprite = posLuggage[toRandFeat];
+            //}
+            setData();
         }
     }
 
@@ -159,11 +264,11 @@ public class Person : MonoBehaviour
     {
         if (dirrection == true)
         {
-            self.Translate((speed * mult) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
+            self.Translate((speed) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
         }
         else
         {
-            self.Translate(-(speed * mult) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
+            self.Translate(-(speed) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
         }
 
         if (farEnough == false)
@@ -185,7 +290,7 @@ public class Person : MonoBehaviour
         speed = speedUse;
     }
 
-    public void reverseMove(bool which)
+    private void reverseMove(bool which)
     {
         Debug.Log("test");
         if (which == true)
@@ -209,6 +314,12 @@ public class Person : MonoBehaviour
             reverseMove(false);
         }
         Debug.Log("AAAAAAAAAA");
+    }
+
+    private void setData()
+    {
+        perData.clothes = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        perData.hat = gameObject.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite;
     }
 }
 

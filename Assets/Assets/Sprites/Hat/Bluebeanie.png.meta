@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bluebeanie_0: 570758543962437105
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

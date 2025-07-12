@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Greybeanie_0: -3850774616030667715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

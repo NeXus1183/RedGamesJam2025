@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Orangejacket_0: -1329250918323073569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

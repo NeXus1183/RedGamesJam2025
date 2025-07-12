@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bluejacket_0: -427061230639770342
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

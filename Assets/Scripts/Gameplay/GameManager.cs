@@ -3,15 +3,21 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public static int level = 0;
+    public static int level = 3;
     private InputAction interact;
     private InputAction interactPos;
+    [SerializeField] private Sprite currentPass;
+    private bool currentPassCat;    
+    [SerializeField] private Sprite[] possibles;
+    [SerializeField] private PeopleSpawnerManager peopleSpawnerManager;
 
-    PersonData toFind;
+
     void Awake()
     {
         interact = InputSystem.actions.FindAction("Interact");
         interactPos = InputSystem.actions.FindAction("InteractPos");
+        rollToFind();
+        peopleSpawnerManager.startSpawn(currentPassCat, currentPass);
     }
 
     private void Start()
@@ -38,6 +44,15 @@ public class GameManager : MonoBehaviour
 
     private void rollToFind()
     {
-
+        int toFind = Random.Range(0, possibles.Length);
+        currentPass = possibles[toFind];
+        if (toFind < 11)
+        {
+            currentPassCat = true;
+        }
+        else
+        {
+            currentPassCat = false;
+        }
     }
 }

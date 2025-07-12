@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Greybaseballhat_0: 5668627930880133502
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

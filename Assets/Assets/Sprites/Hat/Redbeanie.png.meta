@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Redbeanie_0: -2128329064184618434
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

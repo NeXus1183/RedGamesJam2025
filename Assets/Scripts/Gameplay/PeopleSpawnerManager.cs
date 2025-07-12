@@ -6,13 +6,11 @@ public class PeopleSpawnerManager : MonoBehaviour
     [SerializeField] private GameObject personPrefab;
     [SerializeField] private Transform spawnParent;
     private float spawnDelay = 0.5f;
+    private float minreq = 3;
     private float spawnMax = 10;
     void Start()
     {
-        for (int i = 0; i < spawnMax; i++)
-        {
-            createPerson(i);
-        }
+
     }
 
     // Update is called once per frame
@@ -29,7 +27,7 @@ public class PeopleSpawnerManager : MonoBehaviour
         //}
     }
 
-    public void createPerson(int layer)
+    private void createPerson(int layer)
     {
         int spawnPos = Random.Range(0, positions.Length);
         Vector3 spawnPosToUse = new Vector3(positions[spawnPos].position.x, positions[spawnPos].position.y, 0.0f);
@@ -49,13 +47,54 @@ public class PeopleSpawnerManager : MonoBehaviour
         {
             perFuncs.setSpeed(1.25f, 2.5f);
         }
-        else if (GameManager.level == 3)
+        else if (GameManager.level >= 3)
         {
             perFuncs.setSpeed(1.5f, 3.0f);
         }
         else
         {
             perFuncs.setSpeed(2.0f, 3.0f);
+        }
+    }
+
+    private void createPersonPass(int layer, Sprite toSPawn, bool type)
+    {
+        int spawnPos = Random.Range(0, positions.Length);
+        Vector3 spawnPosToUse = new Vector3(positions[spawnPos].position.x, positions[spawnPos].position.y, 0.0f);
+        GameObject newPer = GameObject.Instantiate(personPrefab, spawnPosToUse, Quaternion.identity, spawnParent);
+        for (int i = 0; i < newPer.transform.childCount; i++)
+        {
+            newPer.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder += layer;
+        }
+        Person perFuncs = newPer.GetComponent<Person>();
+        perFuncs.rollDataReq(type, toSPawn);
+        perFuncs.setDir(spawnPos);
+        if (GameManager.level == 1)
+        {
+            perFuncs.setSpeed(1.0f, 2.0f);
+        }
+        else if (GameManager.level == 2)
+        {
+            perFuncs.setSpeed(1.25f, 2.5f);
+        }
+        else if (GameManager.level >= 3)
+        {
+            perFuncs.setSpeed(1.5f, 3.0f);
+        }
+        else
+        {
+            perFuncs.setSpeed(2.0f, 3.0f);
+        }
+    }
+    public void startSpawn(bool type, Sprite item)
+    {
+        for (int i = 0; i < spawnMax; i++)
+        {
+            if (i < minreq)
+            {
+                createPersonPass(i, item, type);
+            }
+            createPerson(i);
         }
     }
 }
