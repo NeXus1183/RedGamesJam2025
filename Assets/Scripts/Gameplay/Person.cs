@@ -5,6 +5,7 @@ public class Person : MonoBehaviour
 {
     [SerializeField] private PersonData perData;
     [SerializeField] private Renderer selfSprite;
+    [SerializeField] private BoxCollider2D selfColldier;
 
     private Vector3 startPos;
     private Transform self;
@@ -14,7 +15,6 @@ public class Person : MonoBehaviour
     private bool farEnough = false;
     private float speed;
     private float mult = 1.0f;
-
 
     [SerializeField] private SpriteRenderer hat;
     [SerializeField] private SpriteRenderer clothes;
@@ -86,8 +86,6 @@ public class Person : MonoBehaviour
 
     public void setDir(int dir)
     {
-        float angleLower = 1.0f;
-        float angleUpper = 1.0f;
         if (dir < 3)
         {
             dirrection = true;
@@ -95,16 +93,6 @@ public class Person : MonoBehaviour
         else
         {
             dirrection = false;
-        }
-
-        if(dir == 1 || dir == 4)
-        {
-            angleUpper = 0.25f;
-
-        }
-        else if (dir == 2 || dir == 5)
-        {
-            angleLower = -0.5f;
         }
 
         if (GameManager.level == 1)
@@ -121,10 +109,8 @@ public class Person : MonoBehaviour
         }
         else
         {
-            mult = 1.4f;
+            mult = 0.5f;
         }
-
-        angle = Random.Range(angleLower, angleUpper);
     }
 
     private void move()
@@ -141,9 +127,10 @@ public class Person : MonoBehaviour
         if (farEnough == false)
         {
             float distance = Vector3.Distance(startPos, transform.position);
-            if (distance > 1.5)
+            if (distance > 5)
             {
                 farEnough = true;
+                selfColldier.enabled = true;
             }
         }
     }
@@ -151,7 +138,35 @@ public class Person : MonoBehaviour
     public void setSpeed(float toSetLower, float toSetUpper)
     {
         float speedUse = Random.Range(toSetLower, toSetUpper);
+        float angleUse = Random.Range(-0.75f, 0.75f);
+        angle = angleUse;
         speed = speedUse;
+    }
+
+    public void reverseMove(bool which)
+    {
+        Debug.Log("test");
+        if (which == true)
+        {
+            speed = -speed;
+        }
+        else if (which == false)
+        {
+            angle = -angle;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BoundaryHori"))
+        {
+            reverseMove(true);
+        }
+        else if(collision.CompareTag("BoundaryVerrt"))
+        {
+            reverseMove(false);
+        }
+        Debug.Log("AAAAAAAAAA");
     }
 }
 

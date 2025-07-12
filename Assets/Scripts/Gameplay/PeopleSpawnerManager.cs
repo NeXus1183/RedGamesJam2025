@@ -6,24 +6,27 @@ public class PeopleSpawnerManager : MonoBehaviour
     [SerializeField] private GameObject personPrefab;
     [SerializeField] private Transform spawnParent;
     private float spawnDelay = 0.5f;
-
+    private float spawnMax = 10;
     void Start()
     {
-        
+        for (int i = 0; i < spawnMax; i++)
+        {
+            createPerson();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawnDelay <= 0.0f)
-        {
-            createPerson();
-            spawnDelay = 0.5f;
-        }
-        else
-        {
-            spawnDelay -= Time.deltaTime;
-        }
+        //if (spawnDelay <= 0.0f && spawnParent.childCount != spawnMax)
+        //{
+        //    createPerson();
+        //    spawnDelay = 0.5f;
+        //}
+        //else
+        //{
+        //    spawnDelay -= Time.deltaTime;
+        //}
     }
 
     public void createPerson()
