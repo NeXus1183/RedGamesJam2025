@@ -45,5 +45,59 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: People
+    uniqueID: 1976489297
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 2298978979
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 3561899531
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 1776095939
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 2982646289
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 1215062413
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 2335552971
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 389542239
+    locked: 0
+  - name: New Layer 9
+    uniqueID: 2224999601
+    locked: 0
+  - name: New Layer 10
+    uniqueID: 592182187
+    locked: 0
+  - name: New Layer 11
+    uniqueID: 1681927523
+    locked: 0
+  - name: New Layer 12
+    uniqueID: 1512756639
+    locked: 0
+  - name: New Layer 13
+    uniqueID: 518334785
+    locked: 0
+  - name: New Layer 14
+    uniqueID: 3516099551
+    locked: 0
+  - name: New Layer 15
+    uniqueID: 3497221421
+    locked: 0
+  - name: New Layer 16
+    uniqueID: 2521178239
+    locked: 0
+  - name: New Layer 17
+    uniqueID: 3714859667
+    locked: 0
+  - name: New Layer 18
+    uniqueID: 3310909893
+    locked: 0
   m_RenderingLayers:
   - Default

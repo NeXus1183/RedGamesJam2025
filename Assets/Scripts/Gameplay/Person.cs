@@ -6,6 +6,8 @@ public class Person : MonoBehaviour
     [SerializeField] private PersonData perData;
     [SerializeField] private Renderer selfSprite;
     [SerializeField] private BoxCollider2D selfColldier;
+    [SerializeField] private Transform hatTrans;
+    [SerializeField] private Transform headTrans;
 
     private Vector3 startPos;
     private Transform self;
@@ -15,6 +17,7 @@ public class Person : MonoBehaviour
     private bool farEnough = false;
     private float speed;
     private float mult = 1.0f;
+    private bool hairlCur = false;
 
     [SerializeField] private SpriteRenderer hat;
     [SerializeField] private SpriteRenderer clothes;
@@ -25,9 +28,6 @@ public class Person : MonoBehaviour
     [SerializeField] private Sprite[] posClothes;
     [SerializeField] private Sprite[] posLuggage;
     [SerializeField] private Sprite[] posPer;
-
-
-    [SerializeField] private Color[] randCol;
 
     private void Awake()
     {
@@ -56,31 +56,73 @@ public class Person : MonoBehaviour
         int toRandFeat;
         for (int i = 0; i < 4; i++)
         {
-            toRandFeat = Random.Range(0, randCol.Length);
             if (i == 0)
             {
-                //toRandFeat = Random.Range(0, posHat.Length);
-                //hat.sprite = posHat[toRandFeat];
-                hat.color = randCol[toRandFeat];
+                toRandFeat = Random.Range(0, posPer.Length);
+                person.sprite = posPer[toRandFeat];
+                if (toRandFeat == 0)
+                {
+                    hairlCur = true;
+                    headTrans.localPosition = new Vector3(headTrans.localPosition.x, 0.086f, headTrans.localPosition.z);
+                }
+                else
+                {
+                    hairlCur = false;
+                }
             }
-            else if (i == 1) 
+            if (i == 1)
             {
-                //toRandFeat = Random.Range(0, posClothes.Length);
-                //clothes.sprite = posClothes[toRandFeat];
-                clothes.color = randCol[toRandFeat];
+                toRandFeat = Random.Range(0, posHat.Length);
+                hat.sprite = posHat[toRandFeat];
+                if (hairlCur == true)
+                {
+                    if (toRandFeat == 0)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.001f, 0.246f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 0 && toRandFeat < 5)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.054f, 0.28f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    {
+                        hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat >=8)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.005f, 0.34f, hatTrans.localPosition.z);
+                    }
+                }
+                else
+                {
+                    if (toRandFeat == 0)
+                    {
+                        hatTrans.localPosition = new Vector3(0.001f, 0.235f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 0 && toRandFeat < 5)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.049f, 0.28f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    {
+                        hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
+                    }
+                    else if (toRandFeat >= 8)
+                    {
+                        hatTrans.localPosition = new Vector3(-0.005f, 0.354f, hatTrans.localPosition.z);
+                    }
+                }
             }
             else if (i == 2)
             {
-                //toRandFeat = Random.Range(0, posLuggage.Length);
-                //luggage.sprite = posLuggage[toRandFeat];
-                luggage.color = randCol[toRandFeat];
+                toRandFeat = Random.Range(0, posClothes.Length);
+                clothes.sprite = posClothes[toRandFeat];
             }
-            else if (i == 3)
-            {
-                //toRandFeat = Random.Range(0, posPer.Length);
-                //person.sprite = posPer[toRandFeat];
-                person.color = randCol[toRandFeat];
-            }
+            //else if (i == 3)
+            //{
+            //    toRandFeat = Random.Range(0, posLuggage.Length);
+            //    luggage.sprite = posLuggage[toRandFeat];
+            //}
         }
     }
 

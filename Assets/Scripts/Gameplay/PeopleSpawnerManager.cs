@@ -11,7 +11,7 @@ public class PeopleSpawnerManager : MonoBehaviour
     {
         for (int i = 0; i < spawnMax; i++)
         {
-            createPerson();
+            createPerson(i);
         }
     }
 
@@ -29,11 +29,15 @@ public class PeopleSpawnerManager : MonoBehaviour
         //}
     }
 
-    public void createPerson()
+    public void createPerson(int layer)
     {
         int spawnPos = Random.Range(0, positions.Length);
         Vector3 spawnPosToUse = new Vector3(positions[spawnPos].position.x, positions[spawnPos].position.y, 0.0f);
         GameObject newPer = GameObject.Instantiate(personPrefab, spawnPosToUse, Quaternion.identity, spawnParent);
+        for (int i = 0; i < newPer.transform.childCount; i++)
+        {
+            newPer.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder += layer;
+        }
         Person perFuncs = newPer.GetComponent<Person>();
         perFuncs.rollData();
         perFuncs.setDir(spawnPos);
