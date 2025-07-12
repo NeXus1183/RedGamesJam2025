@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.Android;
 
 public class Person : MonoBehaviour
 {
     [SerializeField] private PersonData perData;
-    [SerializeField] private SpriteRenderer selfSprite;
+    [SerializeField] private Renderer selfSprite;
 
     private Vector3 startPos;
     private Transform self;
     private bool dirrection;
     private float angle;
-    private float moveDelay = 1.5f;
+    private float moveDelay = 0.25f;
     private bool farEnough = false;
+    private float speed;
+    private float mult = 1.0f;
 
 
     [SerializeField] private SpriteRenderer hat;
@@ -83,33 +86,72 @@ public class Person : MonoBehaviour
 
     public void setDir(int dir)
     {
-        if (dir == 0)
+        float angleLower = 1.0f;
+        float angleUpper = 1.0f;
+        if (dir < 3)
         {
             dirrection = true;
         }
         else
         {
-            dirrection= false;
+            dirrection = false;
         }
-        angle = Random.Range(-0.15f, 0.5f);
+
+        if(dir == 1 || dir == 4)
+        {
+            angleUpper = 0.25f;
+
+        }
+        else if (dir == 2 || dir == 5)
+        {
+            angleLower = -0.5f;
+        }
+
+        if (GameManager.level == 1)
+        {
+            mult = 1.0f;
+        }
+        else if (GameManager.level == 2)
+        {
+            mult = 1.2f;
+        }
+        else if (GameManager.level == 3)
+        {
+            mult = 1.4f;
+        }
+        else
+        {
+            mult = 1.4f;
+        }
+
+        angle = Random.Range(angleLower, angleUpper);
     }
 
     private void move()
     {
         if (dirrection == true)
         {
-            self.Translate(1 * Time.deltaTime, angle * Time.deltaTime, 0);
+            self.Translate((speed * mult) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
         }
         else
         {
-            self.Translate(-1 * Time.deltaTime, angle * Time.deltaTime, 0);
+            self.Translate(-(speed * mult) * Time.deltaTime, (angle * mult) * Time.deltaTime, 0);
         }
 
-        float distance = Vector3.Distance(startPos, transform.position);
-        if (distance > 50)
+        if (farEnough == false)
         {
-            farEnough = true;
+            float distance = Vector3.Distance(startPos, transform.position);
+            if (distance > 1.5)
+            {
+                farEnough = true;
+            }
         }
+    }
+
+    public void setSpeed(float toSetLower, float toSetUpper)
+    {
+        float speedUse = Random.Range(toSetLower, toSetUpper);
+        speed = speedUse;
     }
 }
 

@@ -5,7 +5,7 @@ public class PeopleSpawnerManager : MonoBehaviour
     [SerializeField] private Transform[] positions;
     [SerializeField] private GameObject personPrefab;
     [SerializeField] private Transform spawnParent;
-    private float spawnDelay = 2.0f;
+    private float spawnDelay = 0.5f;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class PeopleSpawnerManager : MonoBehaviour
         if (spawnDelay <= 0.0f)
         {
             createPerson();
-            spawnDelay = 2.0f;
+            spawnDelay = 0.5f;
         }
         else
         {
@@ -34,5 +34,21 @@ public class PeopleSpawnerManager : MonoBehaviour
         Person perFuncs = newPer.GetComponent<Person>();
         perFuncs.rollData();
         perFuncs.setDir(spawnPos);
+        if (GameManager.level == 1)
+        {
+            perFuncs.setSpeed(1.0f, 2.0f);
+        }
+        else if(GameManager.level == 2)
+        {
+            perFuncs.setSpeed(1.25f, 2.5f);
+        }
+        else if (GameManager.level == 3)
+        {
+            perFuncs.setSpeed(1.5f, 3.0f);
+        }
+        else
+        {
+            perFuncs.setSpeed(2.0f, 3.0f);
+        }
     }
 }
