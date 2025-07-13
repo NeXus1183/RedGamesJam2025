@@ -1134,30 +1134,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: bgm.Array.data[0].volume
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: bgm.Array.data[1].volume
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: sfx.Array.data[0].volume
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: sfx.Array.data[1].volume
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: sfx.Array.data[2].volume
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538593468607940139, guid: d3e697f4241d54e4996e1c9c8941b7d7, type: 3}
-      propertyPath: sfx.Array.data[3].volume
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
