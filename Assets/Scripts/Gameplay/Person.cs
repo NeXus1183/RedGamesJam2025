@@ -8,6 +8,11 @@ public class Person : MonoBehaviour
     [SerializeField] private BoxCollider2D selfColldier;
     [SerializeField] private Transform hatTrans;
     [SerializeField] private Transform headTrans;
+    private Vector3 boardCheck;
+    private bool isBoard = false;
+    private bool reachCount;
+    private bool gettingOut = false;
+    float toUse = 0.0f;
 
     private Vector3 startPos;
     private Transform self;
@@ -33,6 +38,8 @@ public class Person : MonoBehaviour
     {
         startPos = transform.position;
         self = transform;
+        boardCheck = GameObject.FindGameObjectWithTag("Board").transform.position;
+        boardCheck = new Vector3(boardCheck.x, boardCheck.y, 0);
     }
     private void Update()
     {
@@ -41,9 +48,17 @@ public class Person : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (moveDelay <= 0)
+        if (moveDelay <= 0 && isBoard == false)
         {
             move();
+        }
+        else if (moveDelay <= 0 && isBoard == true)
+        {
+            board();
+        }
+        else if (moveDelay <= 0 && gettingOut == true)
+        {
+
         }
         else
         {
@@ -88,7 +103,7 @@ public class Person : MonoBehaviour
                     {
                         hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
                     }
-                    else if (toRandFeat >=8)
+                    else if (toRandFeat >= 8)
                     {
                         hatTrans.localPosition = new Vector3(-0.005f, 0.34f, hatTrans.localPosition.z);
                     }
@@ -130,6 +145,7 @@ public class Person : MonoBehaviour
     public void rollDataReq(bool type, Sprite toSpawn)
     {
         int toRandFeat = 0;
+        Debug.Log(toSpawn);
         for (int i = 0; i < 4; i++)
         {
             if (i == 0)
@@ -150,11 +166,11 @@ public class Person : MonoBehaviour
             {
                 if (type == false)
                 {
-                    for (int j = 0; j < posClothes.Length; j++)
+                    for (int j = 0; j < posHat.Length; j++)
                     {
-                        if (posClothes[j] == toSpawn)
+                        if (posHat[j] == toSpawn)
                         {
-                            clothes.sprite = posClothes[j];
+                            hat.sprite = posHat[j];
                             toRandFeat = j;
                         }
                     }
@@ -175,11 +191,11 @@ public class Person : MonoBehaviour
                     {
                         hatTrans.localPosition = new Vector3(-0.054f, 0.28f, hatTrans.localPosition.z);
                     }
-                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    else if (toRandFeat > 4 && toRandFeat < 9)
                     {
                         hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
                     }
-                    else if (toRandFeat >= 8)
+                    else if (toRandFeat >= 9)
                     {
                         hatTrans.localPosition = new Vector3(-0.005f, 0.34f, hatTrans.localPosition.z);
                     }
@@ -194,11 +210,11 @@ public class Person : MonoBehaviour
                     {
                         hatTrans.localPosition = new Vector3(-0.049f, 0.28f, hatTrans.localPosition.z);
                     }
-                    else if (toRandFeat > 4 && toRandFeat < 8)
+                    else if (toRandFeat > 4 && toRandFeat < 9)
                     {
                         hatTrans.localPosition = new Vector3(0.003f, 0.271f, hatTrans.localPosition.z);
                     }
-                    else if (toRandFeat >= 8)
+                    else if (toRandFeat >= 9)
                     {
                         hatTrans.localPosition = new Vector3(-0.005f, 0.354f, hatTrans.localPosition.z);
                     }
@@ -309,17 +325,49 @@ public class Person : MonoBehaviour
         {
             reverseMove(true);
         }
-        else if(collision.CompareTag("BoundaryVerrt"))
+        else if (collision.CompareTag("BoundaryVerrt"))
         {
             reverseMove(false);
         }
-        Debug.Log("AAAAAAAAAA");
     }
 
     private void setData()
     {
         perData.clothes = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         perData.hat = gameObject.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite;
+    }
+
+    private void board()
+    {
+        if (self.position == boardCheck)
+        {
+            reachCount = true;
+        }
+        if (reachCount == false)
+        {
+            self.position = Vector3.MoveTowards(self.position, boardCheck, 3f * Time.deltaTime);
+        }
+        else if (reachCount == true)
+        {
+            selfColldier.enabled = false;
+            self.Translate(3f * Time.deltaTime, 0, 0);
+        }
+    }
+
+    public void startBoard()
+    {
+        isBoard = true;
+    }
+
+    public void beginMoveAway()
+    {
+        gettingOut = true;
+        selfColldier.enabled = false;
+    }
+
+    private void moveAway()
+    {
+        self.Translate(toUse * Time.deltaTime, 0, 0);
     }
 }
 

@@ -6,8 +6,8 @@ public class PeopleSpawnerManager : MonoBehaviour
     [SerializeField] private GameObject personPrefab;
     [SerializeField] private Transform spawnParent;
     private float spawnDelay = 0.5f;
-    private float minreq = 3;
-    private float spawnMax = 10;
+    public static int minreq = 3;
+    public static int spawnMax = 10;
     void Start()
     {
 
@@ -39,15 +39,15 @@ public class PeopleSpawnerManager : MonoBehaviour
         Person perFuncs = newPer.GetComponent<Person>();
         perFuncs.rollData();
         perFuncs.setDir(spawnPos);
-        if (GameManager.level == 1)
+        if (GameManager.level == 2)
         {
             perFuncs.setSpeed(1.0f, 2.0f);
         }
-        else if(GameManager.level == 2)
+        else if(GameManager.level == 4)
         {
             perFuncs.setSpeed(1.25f, 2.5f);
         }
-        else if (GameManager.level >= 3)
+        else if (GameManager.level >= 6)
         {
             perFuncs.setSpeed(1.5f, 3.0f);
         }
@@ -69,15 +69,15 @@ public class PeopleSpawnerManager : MonoBehaviour
         Person perFuncs = newPer.GetComponent<Person>();
         perFuncs.rollDataReq(type, toSPawn);
         perFuncs.setDir(spawnPos);
-        if (GameManager.level == 1)
+        if (GameManager.level == 2)
         {
             perFuncs.setSpeed(1.0f, 2.0f);
         }
-        else if (GameManager.level == 2)
+        else if (GameManager.level == 4)
         {
             perFuncs.setSpeed(1.25f, 2.5f);
         }
-        else if (GameManager.level >= 3)
+        else if (GameManager.level >= 6)
         {
             perFuncs.setSpeed(1.5f, 3.0f);
         }
@@ -94,7 +94,33 @@ public class PeopleSpawnerManager : MonoBehaviour
             {
                 createPersonPass(i, item, type);
             }
-            createPerson(i);
+            else
+            {
+                createPerson(i);
+            }
         }
+    }
+
+    public void sendAllOff()
+    {
+        for (int i = 0; i < spawnParent.childCount; i++)
+        {
+            Person temp = spawnParent.GetChild(i).GetComponent<Person>();
+            temp.beginMoveAway();
+        }
+    }
+
+    public void sendDestroyAll()
+    {
+        for (int i = 0; i < spawnParent.childCount; i++)
+        {
+            Destroy(spawnParent.GetChild(i).gameObject);
+        }
+    }
+
+    public int checkAllGone()
+    {
+        int curRemains = spawnParent.childCount;
+        return curRemains;
     }
 }

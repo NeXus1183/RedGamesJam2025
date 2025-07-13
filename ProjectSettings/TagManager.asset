@@ -8,14 +8,18 @@ TagManager:
   - BoundaryVerrt
   - BoundaryHori
   - Person
+  - Board
+  - Ogu
+  - Tappy
+  - Bam
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - People
   - Water
   - UI
-  - People
+  - 
   - 
   - 
   - 
