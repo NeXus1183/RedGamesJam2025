@@ -46,8 +46,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdd709a7d7f3ff4ab865b91fe7fc987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx: []
-  bgm: []
+  sfx:
+  - clipName: bamFound
+    clip: {fileID: 8300000, guid: 833bef59afe3b2f4b86048f1d5ef27da, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+  - clipName: oguClick
+    clip: {fileID: 8300000, guid: 4057c008873ed54418160cb193b79458, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+  - clipName: oguWait
+    clip: {fileID: 8300000, guid: 7645f7ba9a2469244950dad148e7648f, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+  - clipName: tap
+    clip: {fileID: 8300000, guid: d2273fcf12a303941a20d4b762aa1a94, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+  - clipName: tappyFound
+    clip: {fileID: 8300000, guid: b99a2db15f4383d49873905fa46a1021, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+  bgm:
+  - clipName: mainMenu
+    clip: {fileID: 8300000, guid: af938ec4b271da54fac4c888d2835b8d, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 1
+  - clipName: game
+    clip: {fileID: 8300000, guid: 4f5e4042814004148a0e33b183bfc1af, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 1
   bgmSource: {fileID: 8312328753103429730}
   sfxSource: {fileID: 6605532246205025797}
   masterMult: 0

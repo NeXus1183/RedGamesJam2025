@@ -28,16 +28,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loseTap;
     [SerializeField] private TextMeshProUGUI loseBam;
     [SerializeField] private TextMeshProUGUI loseScore;
+    [SerializeField] private TextMeshProUGUI remain;
 
     private bool gameRunning = false;
     [SerializeField] private int curMin;
     [SerializeField] private int curSpawn;
-    private float time = 10;
+    private float time = 15;
     [SerializeField] Slider timeSlider;
     void Awake()
     {
         interact = InputSystem.actions.FindAction("Interact");
         interactPos = InputSystem.actions.FindAction("InteractPos");
+        FindAnyObjectByType<SoundManager>().StopBGM();
+        FindAnyObjectByType<SoundManager>().StopSfx();
+        FindAnyObjectByType<SoundManager>().PlayBGM("game");
         startLevel();
     }
 
@@ -52,11 +56,12 @@ public class GameManager : MonoBehaviour
         if (gameRunning == true)
         {
             time -= Time.deltaTime;
+            updateRemain();
             setTimeSlide();
             if (time <= 0  && curMin > 0)
             {
                 peopleSpawnerManager.sendDestroyAll();
-                
+                updateScores();
                 lose.SetActive(true);
                 gameRunning = false;
             }
@@ -94,6 +99,7 @@ public class GameManager : MonoBehaviour
                     Person tempCheck = hit.collider.GetComponent<Person>();
                     if (tempCheck.perData.clothes == currentPass || tempCheck.perData.hat == currentPass)
                     {
+                        FindAnyObjectByType<SoundManager>().PlaySFX("tap");
                         Debug.Log("Correct");
                         point += 100;
                         curMin -= 1;
@@ -137,9 +143,26 @@ public class GameManager : MonoBehaviour
         Debug.Log(currentPass);
     }
 
+    private void rollBuds()
+    {
+        float willSpawn = Random.Range(0.0f, 1.0f);
+        if (willSpawn > 0.7f)
+        {
+            int whichBud = Random.Range(0, 3);
+            //if ()
+            //{
+                
+            //}
+        }
+        else
+        {
+            return;
+        }
+    }
     private void startLevel()
     {
         level++;
+        time = 15;
         rollToFind();
         curMin = PeopleSpawnerManager.minreq;
         curSpawn = PeopleSpawnerManager.spawnMax;
@@ -180,6 +203,11 @@ public class GameManager : MonoBehaviour
         losePpl.text = howPPl.ToString();
         loseTap.text = howTapp.ToString();
         loseScore.text = point.ToString();
+    }
+
+    private void updateRemain()
+    {
+        remain.text = curMin.ToString();
     }
 
 }
