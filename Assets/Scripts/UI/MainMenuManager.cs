@@ -22,6 +22,8 @@ public class MainMenuManager : MonoBehaviour
         FindAnyObjectByType<SoundManager>().PlayBGM("mainMenu");
         Debug.Log("Playing");
         FindAnyObjectByType<SoundManager>().PlayBGM("mainMenu");
+        PeopleSpawnerManager.minreq = 3;
+        PeopleSpawnerManager.spawnMax = 10;
     }
 
     private void Update()

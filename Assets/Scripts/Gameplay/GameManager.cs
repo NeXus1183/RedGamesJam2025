@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     private int howOgu;
     private int howTapp;
     private int howBam;
+
+    private bool canRoll = false;
 
     private InputAction interact;
     private InputAction interactPos;
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
                 {
                     addLevel();
                     resetPass();
+                    Debug.Log("testPass");
                     startLevel();
                 }
             }
@@ -161,6 +165,8 @@ public class GameManager : MonoBehaviour
     }
     private void startLevel()
     {
+        passRectMoveIN();
+        StartCoroutine(delayShow());
         level++;
         time = 15;
         rollToFind();
@@ -168,7 +174,6 @@ public class GameManager : MonoBehaviour
         curSpawn = PeopleSpawnerManager.spawnMax;
         gameRunning = true;
         peopleSpawnerManager.startSpawn(currentPassCat, currentPass);
-        passRectMoveIN();
     }
 
     private void addLevel()
@@ -192,7 +197,6 @@ public class GameManager : MonoBehaviour
     }
     private void resetPass()
     {
-        passRectTrans.position = new Vector3(-1000, 0, 0);
         passRect.SetTrigger("toMove");
     }
 
@@ -210,4 +214,9 @@ public class GameManager : MonoBehaviour
         remain.text = curMin.ToString();
     }
 
+    IEnumerator delayShow()
+    {
+        yield return new WaitForSeconds(1);
+        passRectMoveIN();
+    }
 }

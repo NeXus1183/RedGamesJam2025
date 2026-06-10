@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -44,7 +45,6 @@ public class SoundManager : MonoBehaviour
         {
             bgmSource.clip = s.clip;
             bgmSource.loop = s.loop;
-            bgmSource.pitch = s.pitch;
             bgmSource.Play();
         }
     }
@@ -60,7 +60,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             sfxSource.clip = s.clip;
-            sfxSource.pitch = s.pitch;
             sfxSource.Play();
         }
     }

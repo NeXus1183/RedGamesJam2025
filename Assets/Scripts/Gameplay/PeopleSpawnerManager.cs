@@ -3,6 +3,8 @@ using UnityEngine;
 public class PeopleSpawnerManager : MonoBehaviour
 {
     [SerializeField] private Transform[] positions;
+    [SerializeField] private Transform[] extraPos;
+    [SerializeField] private Transform[] oguPos;
     [SerializeField] private GameObject personPrefab;
     [SerializeField] private Transform spawnParent;
     [SerializeField] private GameObject[] buds;
@@ -18,15 +20,7 @@ public class PeopleSpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (spawnDelay <= 0.0f && spawnParent.childCount != spawnMax)
-        //{
-        //    createPerson();
-        //    spawnDelay = 0.5f;
-        //}
-        //else
-        //{
-        //    spawnDelay -= Time.deltaTime;
-        //}
+        
     }
 
     private void createPerson(int layer)
